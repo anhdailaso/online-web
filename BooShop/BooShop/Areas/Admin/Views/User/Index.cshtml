@@ -1,0 +1,68 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<DataModel.EF.User>
+@{
+    /**/
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-body">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>UserName </th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach(var item in @Model)
+                {
+                   
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.Name</td>
+                        <td>@item.Address</td>
+                        <td>@item.Email</td>
+                        <td>@item.Phone</td>
+                        <td class="text-center">
+                            <span class="btn-span-with-tooltip" data-trigger="modal"
+                                data-target="#modal"
+                                data-url="@Url.Action("CapNhatNguoiDung","User", new { id = 1})">
+                                <a class="" title="Cập nhật người dùng">
+                                    <i class="btn fa-2x btn-outline-success fa fa-pencil-square-o btn-treeview" aria-hidden="true"></i>
+                                </a>
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <span class="btn-span-with-tooltip" data-trigger="modal"
+                                  data-target="#modal"
+                                  data-url="@Url.Action("CapNhatNguoiDung","User", new { id = 1})">
+                                <a class="" title="xóa người dùng">
+                                    <i class="btn fa-2x  btn-outline-secondary fa fa-trash-o btn-treeview" aria-hidden="true"></i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model,page=>Url.Action("Index",new { page}))
+    </div>
+    <!-- /.table-responsive -->
+</div>
+<!-- /.panel-body -->
+<div class="modal fade" id="modalCTNhanVien" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:540px">
+        </div>
+    </div>
+</div>
